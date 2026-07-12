@@ -1,3 +1,7 @@
+output "oracle_autonomous_databases_id" {
+  description = "Map of id values across all oracle_autonomous_databases, keyed the same as var.oracle_autonomous_databases"
+  value       = { for k, v in azurerm_oracle_autonomous_database.oracle_autonomous_databases : k => v.id }
+}
 output "oracle_autonomous_databases_admin_password" {
   description = "Map of admin_password values across all oracle_autonomous_databases, keyed the same as var.oracle_autonomous_databases"
   value       = { for k, v in azurerm_oracle_autonomous_database.oracle_autonomous_databases : k => v.admin_password }
