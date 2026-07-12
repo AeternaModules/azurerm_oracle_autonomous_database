@@ -3,6 +3,8 @@ variable "oracle_autonomous_databases" {
 Map of oracle_autonomous_databases, attributes below
 Required:
     - admin_password
+    - admin_password_key_vault_id (alternative to admin_password - read from Key Vault instead)
+    - admin_password_key_vault_secret_name (alternative to admin_password - read from Key Vault instead)
     - auto_scaling_enabled
     - auto_scaling_for_storage_enabled
     - backup_retention_period_in_days
@@ -33,28 +35,30 @@ Optional:
 EOT
 
   type = map(object({
-    admin_password                   = string
-    resource_group_name              = string
-    national_character_set           = string
-    name                             = string
-    mtls_connection_required         = bool
-    location                         = string
-    license_model                    = string
-    db_workload                      = string
-    display_name                     = string
-    data_storage_size_in_tbs         = number
-    compute_model                    = string
-    compute_count                    = number
-    character_set                    = string
-    backup_retention_period_in_days  = number
-    auto_scaling_for_storage_enabled = bool
-    auto_scaling_enabled             = bool
-    db_version                       = string
-    tags                             = optional(map(string))
-    allowed_ips                      = optional(set(string))
-    customer_contacts                = optional(list(string))
-    subnet_id                        = optional(string)
-    virtual_network_id               = optional(string)
+    admin_password                       = string
+    admin_password_key_vault_id          = optional(string)
+    admin_password_key_vault_secret_name = optional(string)
+    resource_group_name                  = string
+    national_character_set               = string
+    name                                 = string
+    mtls_connection_required             = bool
+    location                             = string
+    license_model                        = string
+    db_workload                          = string
+    display_name                         = string
+    data_storage_size_in_tbs             = number
+    compute_model                        = string
+    compute_count                        = number
+    character_set                        = string
+    backup_retention_period_in_days      = number
+    auto_scaling_for_storage_enabled     = bool
+    auto_scaling_enabled                 = bool
+    db_version                           = string
+    tags                                 = optional(map(string))
+    allowed_ips                          = optional(set(string))
+    customer_contacts                    = optional(list(string))
+    subnet_id                            = optional(string)
+    virtual_network_id                   = optional(string)
     long_term_backup_schedule = optional(object({
       enabled                  = bool
       repeat_cadence           = string

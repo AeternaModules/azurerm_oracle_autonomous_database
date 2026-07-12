@@ -1,7 +1,12 @@
+data "azurerm_key_vault_secret" "admin_password" {
+  for_each     = { for k, v in var.oracle_autonomous_databases : k => v if v.admin_password_key_vault_id != null && v.admin_password_key_vault_secret_name != null }
+  name         = each.value.admin_password_key_vault_secret_name
+  key_vault_id = each.value.admin_password_key_vault_id
+}
 resource "azurerm_oracle_autonomous_database" "oracle_autonomous_databases" {
   for_each = var.oracle_autonomous_databases
 
-  admin_password                   = each.value.admin_password
+  admin_password                   = each.value.admin_password != null ? each.value.admin_password : try(data.azurerm_key_vault_secret.admin_password[each.key].value, null)
   resource_group_name              = each.value.resource_group_name
   national_character_set           = each.value.national_character_set
   name                             = each.value.name
