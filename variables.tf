@@ -3,8 +3,8 @@ variable "oracle_autonomous_databases" {
 Map of oracle_autonomous_databases, attributes below
 Required:
     - admin_password
-    - admin_password_key_vault_id (alternative to admin_password - read from Key Vault instead)
-    - admin_password_key_vault_secret_name (alternative to admin_password - read from Key Vault instead)
+    - admin_password_key_vault_id (optional, alternative to admin_password)
+    - admin_password_key_vault_secret_name (optional, alternative to admin_password)
     - auto_scaling_enabled
     - auto_scaling_for_storage_enabled
     - backup_retention_period_in_days
