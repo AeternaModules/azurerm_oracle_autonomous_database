@@ -65,7 +65,7 @@ output "oracle_autonomous_databases_location" {
 }
 output "oracle_autonomous_databases_long_term_backup_schedule" {
   description = "Map of long_term_backup_schedule values across all oracle_autonomous_databases, keyed the same as var.oracle_autonomous_databases"
-  value       = { for k, v in azurerm_oracle_autonomous_database.oracle_autonomous_databases : k => v.long_term_backup_schedule if v.long_term_backup_schedule != null && length(v.long_term_backup_schedule) > 0 }
+  value       = { for k, v in azurerm_oracle_autonomous_database.oracle_autonomous_databases : k => one(v.long_term_backup_schedule) if v.long_term_backup_schedule != null && length(v.long_term_backup_schedule) > 0 }
 }
 output "oracle_autonomous_databases_mtls_connection_required" {
   description = "Map of mtls_connection_required values across all oracle_autonomous_databases, keyed the same as var.oracle_autonomous_databases"
